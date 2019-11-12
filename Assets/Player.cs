@@ -30,22 +30,29 @@ public class Player : MonoBehaviour
     public bool isGrounded()
     {
         distToGround = GetComponent<SpriteRenderer>().bounds.extents.y;
-        print(transform.position);
-        print(distToGround);
-        print(Physics.Raycast(transform.position, -Vector3.up, Mathf.Infinity));
+        //7        print(transform.position);
+        //        print(distToGround);
+        //        print(Physics2D.Raycast(transform.position, -Vector2.up, Mathf.Infinity));
 
-        return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
+        RaycastHit2D r = Physics2D.Raycast(transform.position, -Vector2.up);
+            print(r.point.y);
+        print( transform.position.y);
+        return (r.collider != null);
     }
     // Update is called once per frame
     void Update()
     {
         if(true || isGrounded() )
         {
-            bool d = isGrounded();
+
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
 
-                print("Mid Air true");
+                bool d = isGrounded();
+ //               if (d) print("true"); else print("false");
+
+ //               print("Mid Air true");
                 rb2D.AddForce(vectorUp * thrust);
                 midAir = true;
             }
