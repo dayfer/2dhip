@@ -33,16 +33,15 @@ public class Player : MonoBehaviour
         //7        print(transform.position);
         //        print(distToGround);
         //        print(Physics2D.Raycast(transform.position, -Vector2.up, Mathf.Infinity));
+        LayerMask mask = LayerMask.GetMask("Ground");
+        RaycastHit2D r = Physics2D.Raycast(transform.position, -Vector2.up, distToGround+ 0.1f, mask);
 
-        RaycastHit2D r = Physics2D.Raycast(transform.position, -Vector2.up);
-            print(r.point.y);
-        print( transform.position.y);
         return (r.collider != null);
     }
     // Update is called once per frame
     void Update()
     {
-        if(true || isGrounded() )
+        if(isGrounded() )
         {
 
 
@@ -50,7 +49,7 @@ public class Player : MonoBehaviour
             {
 
                 bool d = isGrounded();
- //               if (d) print("true"); else print("false");
+                if (d) print("true"); else print("false");
 
  //               print("Mid Air true");
                 rb2D.AddForce(vectorUp * thrust);
